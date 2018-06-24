@@ -1,10 +1,22 @@
 const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+const config = require('./config.json')
+const server = express()
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+server.set('view engine', 'pug')
+server.get('/', (req, res) => {
+  res.render('index')
+})
+// Define which folder to use for unbound requests
+server.use(express.static('static'))
+
+server.listen(config.port, () => {
+  console.log(`App listening on port ${config.port}`)
+})
+  .on(`request`, (req, res) => {
+    // Log requests
+    let requestAddress = req.header('x-forwarded-for') ||
+      req.connection.remoteAddress
+    if (config.logHttp) {
+      console.log(`[${requestAddress}] ${req.method} ${req.url}`)
+    }
+  })

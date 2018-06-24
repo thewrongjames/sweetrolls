@@ -1,3 +1,4 @@
 {
-    "localPort": 3000
+    "localPort": 3000,
+    "maxSingleRollDiceAmount": 1000
 }

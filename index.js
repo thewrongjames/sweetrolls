@@ -35,7 +35,10 @@ server.post('/api/:roomName', (request, response) => {
   const diceType = removeCharactersNotInWhitelist(request.body.diceType)
 
   if (
-    !dice.validDiceTypes.includes(diceType) || !diceAmount || diceAmount < 0
+    !dice.validDiceTypes.includes(diceType) ||
+    !diceAmount ||
+    diceAmount < 0 ||
+    diceAmount > config.maxSingleRollDiceAmount
   ) {
     response.sendStatus(400)
     return

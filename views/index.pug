@@ -1,1 +1,11 @@
-p Hello world!
+extends layout.pug
+
+block append head
+  script(src='/javascript/openRoom.js')
+
+block content
+  h1 sweetrolls
+  p A web app for rolling dice with friends.
+  input#roomNameField(type='text', placeholder='Room name')
+  p.hidden#noRoomNameWarning Please enter a room name.
+  button.openRoomButton(onclick='openRoom()') Open room

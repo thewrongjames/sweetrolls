@@ -1,0 +1,59 @@
+body {
+    font-family: arial;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.openRoomButton {
+    margin: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.amountInput {
+    max-width: 100%;
+}
+
+.rollButton {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.verticalLine {
+    border-left: 5px solid white;
+}
+
+.gridContainer {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: 25% 0% 65%;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 60%;
+}
+
+#playerName {
+    max-width: 100%
+}
+
+#noRoomNameWarning,#noPlayerNameWarning {
+    color: red;
+}
+
+ @media only screen and (max-width: 600px) {
+    .gridContainer {
+        grid-template-columns: auto;
+    }
+
+    .verticalLine {
+        display: none
+    }
+}

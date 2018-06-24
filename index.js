@@ -1,6 +1,7 @@
 const express = require('express')
 const config = require('./config.json')
 const server = express()
+const port = process.env.PORT || config.localPort
 
 server.set('view engine', 'pug')
 server.get('/', (req, res) => {
@@ -9,8 +10,8 @@ server.get('/', (req, res) => {
 // Define which folder to use for unbound requests
 server.use(express.static('static'))
 
-server.listen(config.port, () => {
-  console.log(`App listening on port ${config.port}`)
+server.listen(port, () => {
+  console.log(`App listening on port ${port}`)
 })
   .on(`request`, (req, res) => {
     // Log requests

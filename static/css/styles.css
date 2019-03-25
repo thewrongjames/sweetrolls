@@ -5,6 +5,10 @@ body {
     text-align: center;
 }
 
+button {
+  cursor: pointer;
+}
+
 .hidden {
     display: none;
 }
@@ -16,15 +20,15 @@ body {
     margin-right: auto;
 }
 
-.amountInput {
-    max-width: 100%;
+.numberInput {
+    max-width: 30%;
+    display: inline-block;
 }
 
 .rollButton {
-    margin-top: 5px;
-    margin-bottom: 10px;
+    padding: 0;
+    max-width: 30%;
     margin-left: 5px;
-    margin-right: 5px;
 }
 
 .verticalLine {
@@ -38,6 +42,19 @@ body {
     margin-left: auto;
     margin-right: auto;
     min-height: 60%;
+}
+
+.addButtonButtonContainer {
+  width: 100%;
+}
+
+.addButtonButton {
+  margin: auto;
+  margin-top: 5px;
+}
+
+.customButtonContainer {
+  margin-bottom: 5px;
 }
 
 #playerName {

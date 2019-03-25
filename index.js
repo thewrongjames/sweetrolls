@@ -1,6 +1,7 @@
 const express = require('express')
 const config = require('./config.json')
 const dice = require('./dice.js')
+const { valueIsPositiveNumber } = require('./utilities')
 const removeCharactersNotInList = require('validator').whitelist
 const characterWhitelist = require('./characterWhitelist.js')
 const server = express()
@@ -12,7 +13,7 @@ const removeCharactersNotInWhitelist = string => removeCharactersNotInList(
 )
 
 server.set('view engine', 'pug')
-server.use(express.json()) // Enables express json encoding on the server
+server.use(express.json()) // Enables express json encoding on the server.
 
 server.get('/', (request, response) => {
   response.render('index', {page: 'Home'})
@@ -28,27 +29,29 @@ server.get('/api/:roomName', (request, response) => {
 server.post('/api/:roomName', (request, response) => {
   const roomName = removeCharactersNotInWhitelist(request.params.roomName)
   const playerName = removeCharactersNotInWhitelist(request.body.playerName)
-  const diceAmount = parseInt(request.body.diceAmount)
-  const diceType = removeCharactersNotInWhitelist(request.body.diceType)
+  const diceNumber = parseInt(request.body.diceNumber)
+  const diceSides = parseInt(request.body.diceSides)
+  const totalModifier = parseInt(request.body.totalModifier) || 0
   if (
-    !dice.validDiceTypes.includes(diceType) ||
-    !diceAmount ||
-    diceAmount < 0 ||
-    diceAmount > config.maxSingleRollDiceAmount
+    !valueIsPositiveNumber(diceSides) ||
+    !valueIsPositiveNumber(diceNumber) ||
+    diceSides > config.maxDiceSides ||
+    diceNumber > config.maxSingleRollDiceAmount
   ) {
     response.sendStatus(400)
     return
   }
 
-  const result = dice.roll(diceAmount, diceType)
-  // removeCharactersNotInList should ensure that playerName and diceType are
-  // not dangerous to feed back to other users.
+  const results = dice.roll(diceNumber, diceSides)
+  // removeCharactersNotInList and parseInt should ensure that it would be safe
+  // to feed this stuff back to the user.
   const data = {
-    playerName: playerName,
-    diceAmount: diceAmount,
-    diceType: diceType,
-    rolls: result,
-    total: result.reduce((a, b) => a + b, 0)
+    playerName,
+    diceNumber,
+    diceSides,
+    totalModifier,
+    rolls: results,
+    total: results.reduce((a, b) => a + b, 0) + totalModifier
   }
   if (roomLogs[roomName]) {
     roomLogs[roomName].push(data)
@@ -57,7 +60,8 @@ server.post('/api/:roomName', (request, response) => {
   }
   response.sendStatus(200)
 })
-// Define which folder to use for unbound requestuests
+
+// Define which folder to use for unbound requests.
 server.use(express.static('static'))
 
 server.listen(port, () => {

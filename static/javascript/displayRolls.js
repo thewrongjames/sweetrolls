@@ -19,10 +19,16 @@ const drawRoomLog = () => {
 
   const elements = roomLog
     .map(
-      data => (
-        `${data.playerName} rolled ${data.diceAmount}${data.diceType} getting` +
-        ` ${makeEnglishList(data.rolls)} totalling ${data.total}`
-      )
+      data => {
+        let totalModifierText = data.totalModifier
+          ? (data.totalModifier > 0 ? '+ ' : '- ') + Math.abs(data.totalModifier)
+          : ''
+        return (
+          `${data.playerName} rolled ${data.diceNumber}d${data.diceSides} ` +
+          totalModifierText +
+          ` getting ${makeEnglishList(data.rolls)} totalling ${data.total}`
+        )
+      }
     )
     .map(text => {
       const element = document.createElement('p')

@@ -2,7 +2,7 @@ extends layout.pug
 
 block append head
   script(src='/javascript/displayRolls.js')
-  script(src='/javascript/roll.js')
+  script(src='/javascript/manageRolling.js')
 
 block content
   h1 #{page}
@@ -10,31 +10,32 @@ block content
     div.inputArea
       input#playerName(type='text', placeholder='Display name')
       p.hidden#noPlayerNameWarning Please enter a display name.
-      h2 Roll
-      div.rollControl
-        div.d20
-          input.amountInput#d20Amount(type='number',min='1',step='1',value='1')
-          button.rollButton(onclick='roll("d20")') d20
-        div
-          input.amountInput#d12Amount(type='number',min='1',step='1',value='1')
-          button.rollButton(onclick='roll("d12")') d12
-        div
-          input.amountInput#d10Amount(type='number',min='1',step='1',value='1')
-          button.rollButton(onclick='roll("d10")') d10
-        div
-          input.amountInput#d8Amount(type='number',min='1',step='1',value='1')
-          button.rollButton(onclick='roll("d8")') d8
-        div
-          input.amountInput#d6Amount(type='number',min='1',step='1',value='1')
-          button.rollButton(onclick='roll("d6")') d6
-        div
-          input.amountInput#d4Amount(type='number',min='1',step='1',value='1')
-          button.rollButton(onclick='roll("d4")') d4
-        div
-          input.amountInput#d3Amount(type='number',min='1',step='1',value='1')
-          button.rollButton(onclick='roll("d3")') d3
-        div
-          input.amountInput#d2Amount(type='number',min='1',step='1',value='1')
-          button.rollButton(onclick='roll("d2")') d2
+      h2 Quick Roll
+      div
+        input.numberInput#quickRollDiceNumber(
+          type='number',min='1',step='1',value='1'
+        )
+        | d
+        input.numberInput#quickRollDiceSides(
+          type='number',min='1',step='1',value='20'
+        )
+        button.rollButton(onclick='quickRoll()') Roll
+      h2 Add Button
+      div
+        input.numberInput#newButtonDiceNumber(
+          type='number',min='1',step='1',value='1'
+        )
+        | d
+        input.numberInput#newButtonDiceSides(
+          type='number',min='1',step='1',value='20'
+        )
+        | +
+        input.numberInput#newButtonTotalModifier(
+          type='number',step='1',value='0'
+        )
+      div.addButtonButtonContainer
+        button.addButtonButton(onclick='addButton()') Add
+      h2 Custom Buttons
+      div#customButtonsContainer
     div.verticalLine
     div#history

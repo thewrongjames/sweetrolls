@@ -1,4 +1,5 @@
 {
     "localPort": 3000,
-    "maxSingleRollDiceAmount": 1000
+    "maxSingleRollDiceAmount": 1000,
+    "maxDiceSides": 1000
 }

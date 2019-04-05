@@ -7,12 +7,12 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "standard && jest --coverage"
   },
   "dependencies": {
     "express": "^4.15.2",
     "pug": "^2.0.0-rc.4",
-    "standard": "^11.0.1",
     "validator": "^10.4.0"
   },
   "repository": {
@@ -22,10 +22,16 @@
   "bugs": {
     "url": "https://github.com/thewrongjames/sweetrolls/issues"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "SEE LICENSE IN license.md"
+  "license": "SEE LICENSE IN license.md",
+  "devDependencies": {
+    "jest": "^24.5.0",
+    "standard": "^11.0.1"
+  },
+  "standard": {
+    "globals": [
+      "test",
+      "expect",
+      "describe"
+    ]
+  }
 }

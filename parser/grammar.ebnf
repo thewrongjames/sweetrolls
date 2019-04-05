@@ -1,0 +1,9 @@
+S = expression;
+expression = binary operation | term;
+binary_operation = term, binary_operator, term;
+term = bracketed expression | roll | number
+bracketed expression = '(', expression, ')';
+roll = integer, ('d' | 'D'), integer;
+integer = ['-'], { digit };
+digit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+binary_operator = '*' | '/' | '+' | '-';

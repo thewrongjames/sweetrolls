@@ -1,4 +1,5 @@
-const openRoom = () => { // eslint-disable-line no-unused-vars
+const openRoom = event => { // eslint-disable-line no-unused-vars
+  event.preventDefault()
   const roomNameField = document.getElementById('roomNameField')
   const roomName = roomNameField.value.replace(/(\/|\\)/g, '')
   if (!roomName) {
@@ -7,3 +8,5 @@ const openRoom = () => { // eslint-disable-line no-unused-vars
   }
   window.location.assign('/' + roomName)
 }
+
+document.getElementById('roomForm').addEventListener('submit', openRoom)

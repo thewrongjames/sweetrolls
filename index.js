@@ -38,8 +38,7 @@ server.post('/api/:roomName', (request, response) => {
     diceSides > config.maxDiceSides ||
     diceNumber > config.maxSingleRollDiceAmount
   ) {
-    response.sendStatus(400)
-    return
+    return response.status(400).send({ message: '400 Bad Request' })
   }
 
   const results = dice.roll(diceNumber, diceSides)
@@ -58,7 +57,7 @@ server.post('/api/:roomName', (request, response) => {
   } else {
     roomLogs[roomName] = [data]
   }
-  response.sendStatus(200)
+  return response.status(200).send(data)
 })
 
 // Define which folder to use for unbound requests.

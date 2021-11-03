@@ -13,7 +13,7 @@
     "express": "^4.15.2",
     "pug": "^2.0.0-rc.4",
     "standard": "^11.0.1",
-    "validator": "^10.4.0"
+    "validator": "^13.7.0"
   },
   "repository": {
     "type": "git",
